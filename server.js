@@ -1,14 +1,25 @@
-const http = require('http');
+const express = require('express')
+const app = express()
+const port = 3000
+const db = require('./queries')
 
-const hostname = '127.0.0.1';
-const port = 3000;
+app.use(express.json())
+app.use(express.urlencoded())
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
-});
+app.get('/', (request, response) => {
+    response.json({info: 'Node.js, Express, and Postgres API'})
+})
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.get('/students', db.students.getStudents)
+app.get('/students/:id', db.students.getStudentById)
+app.post('/students', db.students.postStudent)
+app.put('students/:id', db.students.updateStudent)
+app.delete('students/:id', db.students.deleteStudent)
+
+
+
+
+app.listen(port, () => {
+    console.log(`App running on port ${port}`)
+})
+
