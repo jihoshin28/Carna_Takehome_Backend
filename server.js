@@ -13,8 +13,8 @@ app.get('/', (request, response) => {
 app.get('/students', db.students.getStudents)
 app.get('/students/:id', db.students.getStudentById)
 app.post('/students', db.students.postStudent)
-app.put('students/:id', db.students.updateStudent)
-app.delete('students/:id', db.students.deleteStudent)
+app.patch('/students/:id', db.students.updateStudent)
+app.delete('/students/:id', db.students.deleteStudent)
 
 
 
