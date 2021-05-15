@@ -56,11 +56,16 @@ const updateStudent = (request, response) => {
     const request_keys = Object.keys(request.body)
     let string = ''
     for(let i = 0; i < request_keys.length; i++){
-        string += `${request_keys[i]} = ${request.body[request_keys[i]]} `
+        if(i !== request_keys.length - 1){
+            string += `${request_keys[i]} = '${request.body[request_keys[i]]}', `
+        } else {
+            string += `${request_keys[i]} = '${request.body[request_keys[i]]}'`
+        }
     }
+
     console.log(string)
     //'UPDATE students SET first_name = $1, last_name = $2, birthday = $3, email = $4, password = $5, city = $6, state = $7 WHERE id = $8'
-    pool.query(`UPDATE students SET ${string}WHERE id = ${id}`, 
+    pool.query(`UPDATE students SET ${string} WHERE id = ${id}`, 
     [],
     (error, results) => {
         if(error){
