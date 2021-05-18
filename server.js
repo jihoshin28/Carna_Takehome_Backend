@@ -1,8 +1,10 @@
-const express = require('express')
+import dotenv from 'dotenv'
+import express from 'express'
+import db from './queries.js'
 const app = express()
 const port = 3000
-const db = require('./queries')
 
+dotenv.config()
 app.use(express.json())
 app.use(express.urlencoded())
 
@@ -20,6 +22,6 @@ app.delete('/students/:id', db.students.deleteStudent)
 
 
 app.listen(port, () => {
-    console.log(`App running on port ${port}`)
+    console.log(`App running on port ${port} for postgres application ${process.env.PORT}`)
 })
 

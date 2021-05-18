@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/jihoshin28/Carna_Takehome_Backend#readme",
   "dependencies": {
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "pg": "^8.6.0"
-  }
+  },
+  "type": "module" 
 }

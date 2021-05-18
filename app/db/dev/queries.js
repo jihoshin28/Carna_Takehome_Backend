@@ -1,14 +1,4 @@
-import dotenv from 'dotenv'
-import { Pool } from 'pg'
-
-dotenv.config()
-
-const databaseConfig = { connectionString: process.env.DATABASE_URL}
-const pool = new Pool(databaseConfig)
-export default pool
-//STUDENT QUERIES
-
-// query for getting all students
+import pool from './pool'
 
 const getStudents = (request, response) => {
     pool.query('SELECT * FROM students ORDER BY id ASC', (error, results) => {
@@ -107,7 +97,8 @@ const getTeacherById = (request, response) => {
         response.status(200).json(results.rows)
     })
 }
-{
+
+export default {
     'students': {
         getStudents,
         getStudentById,
