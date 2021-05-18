@@ -1,11 +1,12 @@
-import dotenv from 'dotenv'
-import { Pool } from 'pg'
+const Pool = require('pg').Pool
 
-dotenv.config()
+const pool = new Pool({
+    user: 'allenshin',
+    host: 'localhost',
+    database: 'carna_takehome',
+    port: 5432,
+})
 
-const databaseConfig = { connectionString: process.env.DATABASE_URL}
-const pool = new Pool(databaseConfig)
-export default pool
 //STUDENT QUERIES
 
 // query for getting all students
@@ -107,7 +108,7 @@ const getTeacherById = (request, response) => {
         response.status(200).json(results.rows)
     })
 }
-{
+module.exports = {
     'students': {
         getStudents,
         getStudentById,
