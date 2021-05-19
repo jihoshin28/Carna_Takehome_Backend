@@ -53,7 +53,7 @@ const createTeacherTable = ()  => {
 // Create course model with teacher_id, name, subject, start_date, duration
 // Associations: belongs_to teacher, has_many students through student_courses
 
-const createCourseTable = ()  => {
+const createCourseTable = () => {
     const createCourseQuery = `CREATE TABLE IF NOT EXISTS courses
     (id SERIAL PRIMARY KEY, 
     teacher_id INTEGER REFERENCES teachers(id) ON DELETE CASCADE,  

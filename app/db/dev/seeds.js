@@ -3,136 +3,152 @@ const faker = require('faker')
 const db = require('../../../queries')
 
 var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
+const dateFormatter = (date) => {
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+    return mm + '/' + dd + '/' + yyyy
+}
 
-let todaysDate = mm + '/' + dd + '/' + yyyy
+const getRandomInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
 
-const createStudents = () => {
+// const createStudents = () => {
+//     const seedArray = []
+//     for(let i = 0; i < 10; i++){
+//         let body = {}
+//         let studentObject = {body}
+//         body['first_name'] = `${faker.name.firstName()}`
+//         body['last_name'] = `${faker.name.lastName()}`
+//         body['email'] = `${faker.internet.email()}`
+//         body['city'] = `${faker.address.city()}`
+//         body['state'] = `${faker.address.stateAbbr()}`
+//         body['password'] = `${faker.internet.password()}`
+//         body['created_on'] = `${dateFormatter(date)}`
+//         seedArray.push(studentObject)
+//     }
+    
+//     for(let i = 0; i < seedArray.length; i++){
+//         console.log(seedArray[i])
+//         db.students.postStudent(seedArray[i], null)
+//     }
+// }
+
+// const currentStudents = () => {
+//     let result
+//     pool.query('SELECT * FROM students ORDER BY id ASC', (error, results) => {
+//         result = results.rows
+//     })
+//     return result
+// }
+// // console.log(currentStudents.map((student) => student.id))
+// console.log(currentStudents())
+
+// const createTeachers = () => {
+//     const seedArray = []
+//     for(let i = 0; i < 10; i++){
+//         let body = {}
+//         let teacherObject = {body}
+//         body['first_name'] = `${faker.name.firstName()}`
+//         body['last_name'] = `${faker.name.lastName()}`
+//         body['email'] = `${faker.internet.email()}`
+//         body['city'] = `${faker.address.city()}`
+//         body['state'] = `${faker.address.stateAbbr()}`
+//         body['password'] = `${faker.internet.password()}`
+//         body['created_on'] = `${dateFormatter(today)}`
+//         seedArray.push(teacherObject)
+//     }
+    
+//     for(let i = 0; i < seedArray.length; i++){
+//         console.log(seedArray[i])
+//         db.teachers.postTeacher(seedArray[i], null)
+//     }
+// }
+
+// const createGroups = () => {
+//     const seedArray = []
+//     for(let i = 0; i < 10; i++){
+//         let body = {}
+//         let groupObject = {body}
+//         body['name'] = `${faker.lorem.word()}`
+//         body['type'] = `${faker.lorem.word()}`
+//         body['created_on'] = `${dateFormatter(today)}`
+//         seedArray.push(groupObject)
+//     }
+    
+//     for(let i = 0; i < seedArray.length; i++){
+//         console.log(seedArray[i])
+//         db.groups.postGroup(seedArray[i], null)
+//     }
+// }
+
+const createCourses = () => {
     const seedArray = []
     for(let i = 0; i < 10; i++){
         let body = {}
-        let studentObject = {body}
-        body['first_name'] = `${faker.name.firstName()}`
-        body['last_name'] = `${faker.name.lastName()}`
-        body['email'] = `${faker.internet.email()}`
-        body['city'] = `${faker.address.city()}`
-        body['state'] = `${faker.address.stateAbbr()}`
-        body['password'] = `${faker.internet.password()}`
-        body['created_on'] = `${todaysDate}`
-        seedArray.push(studentObject)
+        let courseObject = {body}
+        body['teacher_id'] = getRandomInt(7, 54)
+        body['subject'] = `${faker.lorem.word()}`
+        body['start_date'] = `${dateFormatter(faker.date.past())}`
+        body['end_date'] = `${dateFormatter(faker.date.future())}`
+        body['created_on'] = `${dateFormatter(today)}`
+        seedArray.push(courseObject)
     }
     
     for(let i = 0; i < seedArray.length; i++){
         console.log(seedArray[i])
-        db.students.postStudent(seedArray[i], 200)
+        db.courses.postCourse(seedArray[i], null)
     }
 }
 
-const createStudents = () => {
-    const seedArray = []
-    for(let i = 0; i < 10; i++){
-        let body = {}
-        let studentObject = {body}
-        body['first_name'] = `${faker.name.firstName()}`
-        body['last_name'] = `${faker.name.lastName()}`
-        body['email'] = `${faker.internet.email()}`
-        body['city'] = `${faker.address.city()}`
-        body['state'] = `${faker.address.stateAbbr()}`
-        body['password'] = `${faker.internet.password()}`
-        body['created_on'] = `${todaysDate}`
-        seedArray.push(studentObject)
-    }
+// const createForums = () => {
+//     const seedArray = []
+//     for(let i = 0; i < 10; i++){
+//         let body = {}
+//         let forumObject = {body}
+//         body['group_id'] = `${faker.name.firstName()}`
+//         body['title'] = `${faker.lorem.words()}`
+//         body['content'] = `${faker.lorem.paragraph()}`
+//         body['created_on'] = `${dateFormatter(today)}`
+//         seedArray.push(forumObject)
+//     }
     
-    for(let i = 0; i < seedArray.length; i++){
-        console.log(seedArray[i])
-        db.students.postStudent(seedArray[i], 200)
-    }
-}
+//     for(let i = 0; i < seedArray.length; i++){
+//         console.log(seedArray[i])
+//         db.forums.postForum(seedArray[i], null)
+//     }
+// }
 
-const createStudents = () => {
-    const seedArray = []
-    for(let i = 0; i < 10; i++){
-        let body = {}
-        let studentObject = {body}
-        body['first_name'] = `${faker.name.firstName()}`
-        body['last_name'] = `${faker.name.lastName()}`
-        body['email'] = `${faker.internet.email()}`
-        body['city'] = `${faker.address.city()}`
-        body['state'] = `${faker.address.stateAbbr()}`
-        body['password'] = `${faker.internet.password()}`
-        body['created_on'] = `${todaysDate}`
-        seedArray.push(studentObject)
-    }
+// const createPosts = () => {
+//     const seedArray = []
+//     for(let i = 0; i < 10; i++){
+//         let body = {}
+//         let postObject = {body}
+//         body['first_name'] = `${faker.name.firstName()}`
+//         body['last_name'] = `${faker.name.lastName()}`
+//         body['email'] = `${faker.internet.email()}`
+//         body['city'] = `${faker.address.city()}`
+//         body['state'] = `${faker.address.stateAbbr()}`
+//         body['password'] = `${faker.internet.password()}`
+//         body['created_on'] = `${dateFormatter(today)}`
+//         seedArray.push(postObject)
+//     }
     
-    for(let i = 0; i < seedArray.length; i++){
-        console.log(seedArray[i])
-        db.students.postStudent(seedArray[i], 200)
-    }
-}
+//     for(let i = 0; i < seedArray.length; i++){
+//         console.log(seedArray[i])
+//         db.posts.postPost(seedArray[i], null)
+//     }
+// }
 
 
 
-createStudents()
+// createStudents()
+// createTeachers()
+// createGroups()
+createCourses()
+// createForums()
+// createPosts()
 
-// CREATE TABLE IF NOT EXISTS students
-//     (id SERIAL PRIMARY KEY, 
-//     email VARCHAR(100) UNIQUE NOT NULL, 
-//     first_name VARCHAR(100), 
-//     last_name VARCHAR(100), 
-//     birthday DATE, 
-//     city VARCHAR(30),
-//     state VARCHAR(2),
-//     password VARCHAR(100) NOT NULL,
-//     created_on DATE NOT NULL
-
-
-
-// CREATE TABLE IF NOT EXISTS teachers
-//         (id SERIAL PRIMARY KEY, 
-//         email VARCHAR(100) UNIQUE NOT NULL, 
-//         first_name VARCHAR(100), 
-//         last_name VARCHAR(100), 
-//         birthday DATE, 
-//         city VARCHAR(30),
-//         state VARCHAR(2),
-//         password VARCHAR(100) NOT NULL,
-//         created_on DATE NOT NULL
-
-
-
-//         CREATE TABLE IF NOT EXISTS groups
-//         (id SERIAL PRIMARY KEY, 
-//         name VARCHAR(100) NOT NULL, 
-//         type VARCHAR(100) NOT NULL,
-//         created_on DATE NOT NULL
-
-
-
-//         CREATE TABLE IF NOT EXISTS student_courses
-//     (id SERIAL PRIMARY KEY, 
-//     student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
-//     course_id INTEGER REFERENCES courses(id) ON DELETE CASCADE
-
-
-
-//     CREATE TABLE IF NOT EXISTS student_groups
-//     (id SERIAL PRIMARY KEY, 
-//     student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
-//     group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE
-
-
-
-//     CREATE TABLE IF NOT EXISTS forums
-//     (id SERIAL PRIMARY KEY, 
-//     name VARCHAR(50) NOT NULL,
-//     group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE
-
-
-//     CREATE TABLE IF NOT EXISTS posts
-//     (id SERIAL PRIMARY KEY, 
-//     forum_id INTEGER REFERENCES forums(id) ON DELETE CASCADE,
-//     title VARCHAR(100),
-//     content VARCHAR(10000),
-//     created_on DATE NOT NULL

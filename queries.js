@@ -12,11 +12,17 @@ const pool = new Pool({
 // query for getting all students
 
 const getStudents = (request, response) => {
+
     pool.query('SELECT * FROM students ORDER BY id ASC', (error, results) => {
         if (error) {
             throw error
         }
-        response.status(200).json(results.rows)
+        if(!response){
+            console.log(results)
+        } else {
+            response.status(200).json(results.rows)
+        }
+        
     })
 }
 
@@ -440,9 +446,9 @@ const getForumById = (request, response) => {
 
 const postForum = (request, response) => {
     console.log(request.body)
-    const {name, created_on } = request.body
-    pool.query('INSERT INTO forums (name, created_on) VALUES ($1, $2)', 
-    [name, created_on], 
+    const {group_id, title, content, created_on} = request.body
+    pool.query('INSERT INTO forums (group_id, title, content, created_on) VALUES ($1, $2)', 
+    [group_id, title, content, created_on], 
     (error, results) => {
         if(error){
             throw error
@@ -647,12 +653,14 @@ module.exports = {
         updatePost,
         deletePost
     },
-    'student_groups': {
-        getStudentsInGroup,
-        getGroupsofStudent
-    },
-    'student_courses': {
-        getStudentsInCourse,
-        getCourseofStudent
-    }    
+    // 'student_groups': {
+    //     createStudentGroup, 
+    //     getStudentsInGroup,
+    //     getGroupsofStudent
+    // },
+    // 'student_courses': {
+    //     createStudentCourse,
+    //     getStudentsInCourse,
+    //     getCourseofStudent
+    // }    
 }
