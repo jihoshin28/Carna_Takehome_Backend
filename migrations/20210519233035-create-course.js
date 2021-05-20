@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       teacher_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       subject: {
         type: Sequelize.STRING

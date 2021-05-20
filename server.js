@@ -3,15 +3,12 @@ const express = require('express')
 const port = 3001
 const routes = require('./routes')
 const server = express()
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 server.use(express.json())
 server.use('/api', routes)
-
-// const db = require('./queries')
-
-
-server.use(express.json())
-server.use(express.urlencoded())
 
 
 server.listen(port, () => {
