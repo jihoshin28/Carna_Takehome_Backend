@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "allenshin",
+    "password": "jeeho123",
+    "database": "carna_takehome",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "allenshin",
+    "password": "jeeho123",
+    "database": "carna_takehome",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "allenshin",
+    "password": "jeeho123",
+    "database": "carna_takehome",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
