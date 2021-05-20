@@ -1,14 +1,14 @@
 {
   "development": {
-    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome/dev_db",
+    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome",
     "dialect": "postgres"
   },
   "test": {
-    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome/test_db",
+    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome",
     "dialect": "postgres"
   },
   "production": {
-    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome/prod_db",
+    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome",
     "dialect": "postgres"
   }
 }

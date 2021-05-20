@@ -2,14 +2,7 @@ const models = require('../models')
 
 const getAllGroups = async(req, res) => {
     try {
-        const groups = await models.Group.findAll({
-            include: [
-                {
-                    model: models.Forum,
-                    as: 'groups'
-                }
-            ]
-        });
+        const groups = await models.Group.findAll();
         return res.status(200).json({groups})
     } catch (error){
         return res.status(500).send(error.message)
@@ -20,13 +13,7 @@ const getGroupById = async(req, res) => {
     try {
         const { id } = req.params;
         const group = await models.Group.findOne({
-            where: { id: id},
-            include: [
-                {
-                    model: models.Forum,
-                    as: 'forums'
-                }
-            ]
+            where: { id: id}
         })
         if(group){
             return res.status(200).json({group})
