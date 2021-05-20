@@ -1,23 +1,14 @@
 {
   "development": {
-    "username": "allenshin",
-    "password": "jeeho123",
-    "database": "carna_takehome",
-    "host": "127.0.0.1",
+    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome/dev_db",
     "dialect": "postgres"
   },
   "test": {
-    "username": "allenshin",
-    "password": "jeeho123",
-    "database": "carna_takehome",
-    "host": "127.0.0.1",
+    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome/test_db",
     "dialect": "postgres"
   },
   "production": {
-    "username": "allenshin",
-    "password": "jeeho123",
-    "database": "carna_takehome",
-    "host": "127.0.0.1",
+    "url": "postgres://allenshin:jeeho123@localhost:5432/carna_takehome/prod_db",
     "dialect": "postgres"
   }
 }
