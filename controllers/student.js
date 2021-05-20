@@ -1,112 +1,88 @@
-const Role = require('../models').Role;
-const User = require('../models').User;
+const models = require('../models')
+
+const getAllStudents = async(req, res) => {
+    try {
+        const students = await models.Student.findAll({
+            include: [
+                {
+                    model: models.Course,
+                    as: 'courses'
+                }
+            ]
+        });
+        return res.status(200).json({student})
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
+
+const getStudentById = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const course = await models.Student.findOne({
+            where: { id: id},
+            include: [
+                {
+                    model: models.Course,
+                    as: 'courses'
+                }
+            ]
+        })
+        if(course){
+            return res.status(200).json({course})
+        }
+        return res.status(404).send('Course with this ID does not exist')
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
+
+const createStudent = async(req, res) => {
+    try {
+        const student = await models.Student.create(req.body)
+        return res.status(201).json({
+            post,
+        })
+    } catch (error){
+        return res.status(500).json({error: error.message})
+    }
+}
+
+const updateStudent = async(req, res) => {
+    try{
+        const {id} = req.params
+        const [updated] = await models.Student.update(req.body, {
+            where: {id: id}
+        })
+        if(updated){
+            const updatedStudent = await models.Student.findOne({where: {id: id}})
+            return res.status(200).json({student: updatedStudent})
+        }
+        throw new Error('Student not found');
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
+
+const deleteStudent = async(req, res) => {
+    try {
+        const {id} = req.params
+        const [deleted] = await models.Student.destroy({
+            where: {id: id}
+        })
+        if(deleted){
+            return res.status(204).send(`Deleted student with id ${id}`)
+        }
+        throw new Error('Student not found')
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
 
 module.exports = {
-  list(req, res) {
-    return Role
-      .findAll({
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((roles) => res.status(200).send(roles))
-      .catch((error) => { res.status(400).send(error); });
-  },
-
-  getById(req, res) {
-    return Role
-      .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((role) => {
-        if (!role) {
-          return res.status(404).send({
-            message: 'Role Not Found',
-          });
-        }
-        return res.status(200).send(role);
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  add(req, res) {
-    return Role
-      .create({
-        role_name: req.body.role_name,
-      })
-      .then((role) => res.status(201).send(role))
-      .catch((error) => res.status(400).send(error));
-  },
-
-  addUser(req, res) {
-    return Role
-      .findById(req.body.role_id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((role) => {
-        if (!role) {
-          return res.status(404).send({
-            message: 'Role Not Found',
-          });
-        }
-        User.findById(req.body.role_id).then((course) => {
-          if (!course) {
-            return res.status(404).send({
-              message: 'User Not Found',
-            });
-          }
-          role.addUser(course);
-          return res.status(200).send(role);
-        })
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  update(req, res) {
-    return Role
-      .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then(role => {
-        if (!role) {
-          return res.status(404).send({
-            message: 'Role Not Found',
-          });
-        }
-        return role
-          .update({
-            role_name: req.body.role_name || classroom.role_name,
-          })
-          .then(() => res.status(200).send(role))
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  delete(req, res) {
-    return Role
-      .findById(req.params.id)
-      .then(role => {
-        if (!role) {
-          return res.status(400).send({
-            message: 'Role Not Found',
-          });
-        }
-        return role
-          .destroy()
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-};
+    getAllStudents,
+    getStudentById,
+    createStudent,
+    updateStudent,
+    deleteStudent
+}

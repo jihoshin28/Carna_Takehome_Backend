@@ -1,112 +1,75 @@
-const Role = require('../models').Role;
-const User = require('../models').User;
+const models = require('../models')
+
+const getAllPosts = async(req, res) => {
+    try {
+        const posts = await models.Post.findAll();
+        return res.status(200).json({posts})
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
+
+const getPostById = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await models.Post.findOne({
+            where: { id: id}
+        })
+        if(post){
+            return res.status(200).json({post})
+        }
+        return res.status(404).send('Post with this ID does not exist')
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
+
+const createPost = async(req, res) => {
+    try {
+        const post = await models.Post.create(req.body)
+        return res.status(201).json({
+            post
+        })
+    } catch (error){
+        return res.status(500).json({error: error.message})
+    }
+}
+
+const updatePost = async(req, res) => {
+    try{
+        const {id} = req.params
+        const [updated] = await models.Post.update(req.body, {
+            where: {id: id}
+        })
+        if(updated){
+            const updatedPost = await models.Post.findOne({where: {id: id}})
+            return res.status(200).json({post: updatedPost})
+        }
+        throw new Error('Post not found');
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
+
+const deletePost = async(req, res) => {
+    try {
+        const {id} = req.params
+        const [deleted] = await models.Post.destroy({
+            where: {id: id}
+        })
+        if(deleted){
+            return res.status(204).send(`Deleted post with id ${id}`)
+        }
+        throw new Error('Post not found')
+    } catch (error){
+        return res.status(500).send(error.message)
+    }
+}
 
 module.exports = {
-  list(req, res) {
-    return Role
-      .findAll({
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((roles) => res.status(200).send(roles))
-      .catch((error) => { res.status(400).send(error); });
-  },
-
-  getById(req, res) {
-    return Role
-      .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((role) => {
-        if (!role) {
-          return res.status(404).send({
-            message: 'Role Not Found',
-          });
-        }
-        return res.status(200).send(role);
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  add(req, res) {
-    return Role
-      .create({
-        role_name: req.body.role_name,
-      })
-      .then((role) => res.status(201).send(role))
-      .catch((error) => res.status(400).send(error));
-  },
-
-  addUser(req, res) {
-    return Role
-      .findById(req.body.role_id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((role) => {
-        if (!role) {
-          return res.status(404).send({
-            message: 'Role Not Found',
-          });
-        }
-        User.findById(req.body.role_id).then((course) => {
-          if (!course) {
-            return res.status(404).send({
-              message: 'User Not Found',
-            });
-          }
-          role.addUser(course);
-          return res.status(200).send(role);
-        })
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  update(req, res) {
-    return Role
-      .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then(role => {
-        if (!role) {
-          return res.status(404).send({
-            message: 'Role Not Found',
-          });
-        }
-        return role
-          .update({
-            role_name: req.body.role_name || classroom.role_name,
-          })
-          .then(() => res.status(200).send(role))
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  delete(req, res) {
-    return Role
-      .findById(req.params.id)
-      .then(role => {
-        if (!role) {
-          return res.status(400).send({
-            message: 'Role Not Found',
-          });
-        }
-        return role
-          .destroy()
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+    getAllPosts,
+    getPostById,
+    createPost,
+    updatePost,
+    deletePost
 };
