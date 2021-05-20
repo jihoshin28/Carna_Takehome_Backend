@@ -7,11 +7,12 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-server.use(express.json())
+// server.use(express.json())
 server.use('/api', routes)
 
 
 server.listen(port, () => {
+    console.log(routes)
     console.log(`App running on port ${port} for postgres application ${process.env.DATABASE_URL}`)
 })
 

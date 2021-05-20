@@ -8,54 +8,54 @@ const posts = require('../controllers/post')
 
 const router = Router()
 
-router.get('/', (req, res) => res.send('Welcome snowflake'))
+router.get('/', (req, res) => res.send('Welcome!'))
 
 // students routes
 
-router.get('/students', (req, res) => students.getAllStudents)
-router.get('/students/:id', (req, res) => students.getStudentById)
-router.post('/students', (req, res) => students.createStudent)
-router.put('/students/:id', (req, res) => students.updateStudent)
-router.delete('/students/:id', (req, res) => students.deleteStudent)
+router.get('/students', students.getAllStudents)
+router.get('/students/:id', students.getStudentById)
+router.post('/students', students.createStudent)
+router.put('/students/:id', students.updateStudent)
+router.delete('/students/:id', students.deleteStudent)
 
 // teachers routes
 
-router.get('/teachers', (req, res) => teachers.getAllTeachers)
-router.get('/teachers/:id', (req, res) => teachers.getTeacherById)
-router.post('/teachers', (req, res) => teachers.createTeacher)
-router.put('/teachers/:id', (req, res) => teachers.updateTeacher)
-router.delete('/teachers/:id', (req, res) => teachers.deleteTeacher)
+router.get('/teachers', teachers.getAllTeachers)
+router.get('/teachers/:id', teachers.getTeacherById)
+router.post('/teachers', teachers.createTeacher)
+router.put('/teachers/:id', teachers.updateTeacher)
+router.delete('/teachers/:id', teachers.deleteTeacher)
 
 // groups routes
 
-router.get('/groups', (req, res) => groups.getAllGroups)
-router.get('/groups/:id', (req, res) => groups.getGroupById)
-router.post('/groups', (req, res) => groups.createGroup)
-router.put('/groups/:id', (req, res) => groups.updateGroup)
-router.delete('/groups/:id', (req, res) => groups.deleteGroup)
+router.get('/groups', groups.getAllGroups)
+router.get('/groups/:id', groups.getGroupById)
+router.post('/groups', groups.createGroup)
+router.put('/groups/:id', groups.updateGroup)
+router.delete('/groups/:id', groups.deleteGroup)
 
 // courses routes
 
-router.get('/courses', (req, res) => courses.getAllCourses)
-router.get('/courses/:id', (req, res) => courses.getCourseById)
-router.post('/courses', (req, res) => courses.createCourse)
-router.put('/courses/:id', (req, res) => courses.updateCourse)
-router.delete('/courses/:id', (req, res) => courses.deleteCourse)
+router.get('/courses', courses.getAllCourses)
+router.get('/courses/:id', courses.getCourseById)
+router.post('/courses', courses.createCourse)
+router.put('/courses/:id', courses.updateCourse)
+router.delete('/courses/:id', courses.deleteCourse)
 
 // forums routes
 
-router.get('/forums', (req, res) => forums.getAllForums)
-router.get('/forums/:id', (req, res) => forums.getForumById)
-router.post('/forums', (req, res) => forums.createForum)
-router.put('/forums/:id', (req, res) => forums.updateForum)
-router.delete('/forums/:id', (req, res) => forums.deleteForum)
+router.get('/forums', forums.getAllForums)
+router.get('/forums/:id', forums.getForumById)
+router.post('/forums', forums.createForum)
+router.put('/forums/:id', forums.updateForum)
+router.delete('/forums/:id', forums.deleteForum)
 
 // posts routes 
 
-router.get('/posts', (req, res) => posts.getAllPosts)
-router.get('/posts/:id', (req, res) => posts.getPostById)
-router.post('/posts', (req, res) => posts.createPost)
-router.put('/posts/:id', (req, res) => posts.updatePost)
-router.delete('/posts/:id', (req, res) => posts.deletePost)
+router.get('/posts', posts.getAllPosts)
+router.get('/posts/:id', posts.getPostById)
+router.post('/posts', posts.createPost)
+router.put('/posts/:id', posts.updatePost)
+router.delete('/posts/:id', posts.deletePost)
 
 module.exports = router
