@@ -5,6 +5,7 @@ const groups = require('../controllers/group')
 const courses = require('../controllers/course')
 const forums = require('../controllers/forum')
 const posts = require('../controllers/post')
+const auth = require('../controllers/auth')
 
 const router = Router()
 
@@ -57,5 +58,10 @@ router.get('/posts/:id', posts.getPostById)
 router.post('/posts', posts.createPost)
 router.put('/posts/:id', posts.updatePost)
 router.delete('/posts/:id', posts.deletePost)
+
+//auth routes
+
+router.post('/auth/login', auth.login)
+router.post('/auth/signup', auth.signUp)
 
 module.exports = router
