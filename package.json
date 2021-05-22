@@ -12,9 +12,7 @@
     "seed-posts": "sequelize db:seed --seed 20210520220915-Post.js",
     "seed-1": "npm-run-all -p seed-students seed-teachers seed-groups",
     "seed-2": "npm-run-all -p seed-courses seed-forums",
-    "create-db": "babel-node ./app/db/dev/dbCreate dbcreate",
-    "create-dev-tables": "babel-node ./app/db/dev/dbConnection createAllTables",
-    "drop-dev-tables": "babel-node ./app/db/dev/dbConnection dropAllTables",
+    "create-db": "babel-node ./dev/dbCreate createdb",
     "start": "nodemon --watch . --exec babel-node -- server",
     "setup": "npm-run-all -s create-db create-dev-tables",
     "seed": "npm-run-all -s seed-1 seed-2 seed-posts"

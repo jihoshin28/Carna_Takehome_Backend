@@ -1,14 +1,14 @@
 var pgtools = require('pgtools')
 const config = {
-    user: "allenshin",
+    user: "postgres",
     host: "localhost",
-    password: "jeeho123",
+    password: "1234",
     port: 5432
 }
 
-
-let createdb = async () => {
-    await pgtools.createdb(config, "carna", function(err, res) {
+let createdb = () => {
+    console.log('ran')
+    pgtools.createdb(config, "carna_takehome_server", function(err, res) {
         if (err) {
           console.error(err);
           process.exit(-1);
@@ -20,3 +20,5 @@ let createdb = async () => {
 module.exports = {
     createdb
 }
+
+require('make-runnable')
