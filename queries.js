@@ -13,7 +13,7 @@ const pool = new Pool({
 
 const getStudents = (request, response) => {
 
-    pool.query('SELECT * FROM students ORDER BY id ASC', (error, results) => {
+    pool.query('SELECT * FROM Student ORDER BY id ASC', (error, results) => {
         if (error) {
             throw error
         }

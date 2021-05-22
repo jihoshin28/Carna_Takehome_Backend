@@ -10,6 +10,7 @@ const getAllStudents = async(req, res) => {
                 }
             ]
         });
+        console.log(students)
         return res.status(200).json({students})
     } catch (error){
         return res.status(500).send(`ERROR: ${error.message}`)

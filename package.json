@@ -4,10 +4,20 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "seed-students": "sequelize db:seed --seed 20210520220830-Student.js",
+    "seed-teachers": "sequelize db:seed --seed 20210520220838-Teacher.js",
+    "seed-groups": "sequelize db:seed --seed 20210520220849-Group.js",
+    "seed-courses": "sequelize db:seed --seed 20210520220846-Course.js", 
+    "seed-forums": "sequelize db:seed --seed 20210520220851-Forum.js",
+    "seed-posts": "sequelize db:seed --seed 20210520220915-Post.js",
+    "seed-1": "npm-run-all -p seed-students seed-teachers seed-groups",
+    "seed-2": "npm-run-all -p seed-courses seed-forums",
+    "create-db": "babel-node ./app/db/dev/dbCreate dbcreate",
     "create-dev-tables": "babel-node ./app/db/dev/dbConnection createAllTables",
     "drop-dev-tables": "babel-node ./app/db/dev/dbConnection dropAllTables",
     "start": "nodemon --watch . --exec babel-node -- server",
-    "setup": "npm-run-all -p start create-dev-tables"
+    "setup": "npm-run-all -s create-db create-dev-tables",
+    "seed": "npm-run-all -s seed-1 seed-2 seed-posts"
   },
   "repository": {
     "type": "git",
@@ -34,6 +44,7 @@
     "npm-run-all": "^4.1.5",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
+    "pgtools": "^0.3.1",
     "require": "^2.4.20",
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0"

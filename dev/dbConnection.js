@@ -1,4 +1,4 @@
-const pool = require('./pool')
+const pool = require('./app/db/dev/pool')
 
 pool.on('connect', () => {
     console.log('connected to the db')
@@ -241,24 +241,19 @@ const dropPostTable = () => {
 
 // Delayed table creation
 
-const delayOneSecond = (callback) => {
-  console.log('hit')
-  setTimeout(function(){
-    callback()
-  }, 1000)
-}
+
 
 // Create all tables
 
 const createAllTables = async() => {
-    await delayOneSecond(() => createStudentTable());
-    await delayOneSecond(() => createTeacherTable());
-    await delayOneSecond(() => createGroupTable());
-    await delayOneSecond(() => createCourseTable());
-    await delayOneSecond(() => createStudentGroupTable());
-    await delayOneSecond(() => createStudentCourseTable());
-    await delayOneSecond(() => createForumTable());
-    await delayOneSecond(() => createPostTable());
+    await createStudentTable();
+    await createTeacherTable();
+    await createGroupTable();
+    await createCourseTable();
+    await createStudentGroupTable();
+    await createStudentCourseTable();
+    await createForumTable();
+    await createPostTable();
 }
 
 // Drop all tables

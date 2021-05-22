@@ -1,6 +1,6 @@
 const pool = require('./pool')
 const faker = require('faker')
-const db = require('../../../queries')
+const db = require('../queries')
 
 var today = new Date();
 const dateFormatter = (date) => {
