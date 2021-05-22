@@ -23,6 +23,9 @@ module.exports = {
       state: {
         type: Sequelize.STRING
       },
+      image: {
+        type: Sequelize.STRING
+      },
       password: {
         type: Sequelize.STRING
       },

@@ -9,6 +9,7 @@ const createTeachers = () => {
       body['email'] = `${faker.internet.email()}`
       body['city'] = `${faker.address.city()}`
       body['state'] = `${faker.address.stateAbbr()}`
+      body['image'] = `${faker.image.avatar()}`
       body['password'] = `${faker.internet.password()}`
       body['createdAt'] = new Date()
       body['updatedAt'] = new Date()

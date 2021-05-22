@@ -7,6 +7,10 @@ const getAllStudents = async(req, res) => {
                 {
                     model: models.Course,
                     as: 'courses'
+                },
+                {
+                    model: models.Group,
+                    as: 'groups'
                 }
             ]
         });

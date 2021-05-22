@@ -17,10 +17,10 @@ module.exports = {
         allowNull: false
       },
       completion: {
-        type: Sequelize.FLOAT
+        type: Sequelize.INTEGER
       },
       score: {
-        type: Sequelize.FLOAT
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

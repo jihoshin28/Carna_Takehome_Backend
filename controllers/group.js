@@ -2,7 +2,12 @@ const models = require('../models')
 
 const getAllGroups = async(req, res) => {
     try {
-        const groups = await models.Group.findAll();
+        const groups = await models.Group.findAll({
+            include: {
+                model: models.Student,
+                as: 'students'
+            }
+        });
         return res.status(200).json({groups})
     } catch (error){
         return res.status(500).send(error.message)

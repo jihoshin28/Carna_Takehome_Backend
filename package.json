@@ -10,11 +10,14 @@
     "seed-courses": "sequelize db:seed --seed 20210520220846-Course.js",
     "seed-forums": "sequelize db:seed --seed 20210520220851-Forum.js",
     "seed-posts": "sequelize db:seed --seed 20210520220915-Post.js",
+    "seed-studentgroups": "sequelize db:seed --seed 20210522183654-StudentCourse.js",
+    "seed-studentcourses": "sequelize db:seed --seed 20210522183707-StudentGroup.js",
     "seed-1": "npm-run-all -p seed-students seed-teachers seed-groups",
     "seed-2": "npm-run-all -p seed-courses seed-forums",
+    "seed-3": "npm-run-all -p seed-studentgroups seed-studentcourses seed-posts",
     "create-db": "babel-node ./db/dbCreate createdb",
     "start": "nodemon --watch . --exec babel-node -- server",
-    "seed": "npm-run-all -s seed-1 seed-2 seed-posts"
+    "seed": "npm-run-all -s seed-1 seed-2 seed-3"
   },
   "repository": {
     "type": "git",

@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   StudentCourse.init({
     course_id: DataTypes.INTEGER,
     student_id: DataTypes.INTEGER,
-    completion: DataTypes.FLOAT,
-    score: DataTypes.FLOAT
+    completion: DataTypes.INTEGER,
+    score: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'StudentCourse',
