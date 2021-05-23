@@ -15,6 +15,7 @@ const getAllStudents = async(req, res) => {
             ]
         });
         console.log(students)
+        res.header("Access-Control-Allow-Origin", "*");
         return res.status(200).json({students})
     } catch (error){
         return res.status(500).send(`ERROR: ${error.message}`)
@@ -24,7 +25,7 @@ const getAllStudents = async(req, res) => {
 const getStudentById = async(req, res) => {
     try {
         const { id } = req.params;
-        const course = await models.Student.findOne({
+        const student = await models.Student.findOne({
             where: { id: id},
             include: [
                 {
@@ -33,8 +34,8 @@ const getStudentById = async(req, res) => {
                 }
             ]
         })
-        if(course){
-            return res.status(200).json({course})
+        if(student){
+            return res.status(200).json({student})
         }
         return res.status(404).send('Course with this ID does not exist')
     } catch (error){
@@ -46,7 +47,7 @@ const createStudent = async(req, res) => {
     try {
         const student = await models.Student.create(req.body)
         return res.status(201).json({
-            post,
+            student,
         })
     } catch (error){
         return res.status(500).json({error: error.message})
@@ -72,7 +73,7 @@ const updateStudent = async(req, res) => {
 const deleteStudent = async(req, res) => {
     try {
         const {id} = req.params
-        const [deleted] = await models.Student.destroy({
+        const deleted = await models.Student.destroy({
             where: {id: id}
         })
         if(deleted){

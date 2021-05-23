@@ -5,7 +5,10 @@ const groups = require('../controllers/group')
 const courses = require('../controllers/course')
 const forums = require('../controllers/forum')
 const posts = require('../controllers/post')
+const student_groups = require ('../controllers/studentgroup')
+const student_courses = require ('../controllers/studentcourse')
 const auth = require('../controllers/auth')
+
 
 const router = Router()
 
@@ -58,6 +61,17 @@ router.get('/posts/:id', posts.getPostById)
 router.post('/posts', posts.createPost)
 router.put('/posts/:id', posts.updatePost)
 router.delete('/posts/:id', posts.deletePost)
+
+//studentgroup routes
+
+router.get('/student_groups', student_groups.getAllStudentGroups)
+router.post('/student_groups', student_groups.createStudentGroup)
+router.delete('/student_groups/:group_id/:student_id', student_groups.deleteStudentGroup)
+
+//studentcourse routes
+
+router.post('/student_courses', student_courses.createStudentCourse)
+router.delete('/student_courses/:course_id/:student_id', student_courses.deleteStudentCourse)
 
 //auth routes
 

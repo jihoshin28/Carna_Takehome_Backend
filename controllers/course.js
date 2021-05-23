@@ -41,7 +41,7 @@ const createCourse = async(req, res) => {
     try {
         const course = await models.Course.create(req.body)
         return res.status(201).json({
-            post,
+            course,
         })
     } catch (error){
         return res.status(500).json({error: error.message})
@@ -67,7 +67,7 @@ const updateCourse = async(req, res) => {
 const deleteCourse = async(req, res) => {
     try {
         const {id} = req.params
-        const [deleted] = await models.Course.destroy({
+        const deleted = await models.Course.destroy({
             where: {id: id}
         })
         if(deleted){

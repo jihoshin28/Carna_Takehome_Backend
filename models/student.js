@@ -24,7 +24,17 @@ module.exports = (sequelize, DataTypes) => {
       Student.hasMany(models.Post, {
         foreignKey: 'student_id',
         as: 'posts'
-      })
+      });
+      // Student.hasMany(models.StudentGroup, {
+      //   foreignKey: 'student_id',
+      //   onDelete: 'cascade',
+      //   hooks: true,
+      // });
+      // Student.hasMany(models.StudentCourse, {
+      //   foreignKey: 'student_id',
+      //   onDelete: 'cascade',
+      //   hooks: true,
+      // });
     }
   };
   Student.init({

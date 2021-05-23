@@ -14,13 +14,21 @@ module.exports = (sequelize, DataTypes) => {
       Group.belongsToMany(models.Student, {
         through: 'StudentGroup',
         as: 'students',
-        foreignKey: 'group_id'
+        foreignKey: 'group_id',
+        onDelete: 'cascade',
+        hooks: true,
       });
+      // Group.hasMany(models.StudentGroup, {
+      //   foreignKey: 'group_id',
+      //   onDelete: 'cascade',
+      //   hooks: true,
+      // });
     }
   };
   Group.init({
     name: DataTypes.STRING,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    image: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Group',

@@ -12,6 +12,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      type: {
+        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.STRING(500)
+      },
       name: {
         type: Sequelize.STRING
       },

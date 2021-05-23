@@ -10,6 +10,7 @@ const getAllTeachers = async(req, res) => {
                 }
             ]
         });
+        res.header("Access-Control-Allow-Origin", "*");
         return res.status(200).json({teachers})
     } catch (error){
         return res.status(500).send(error.message)
@@ -67,7 +68,7 @@ const updateTeacher = async(req, res) => {
 const deleteTeacher = async(req, res) => {
     try {
         const {id} = req.params
-        const [deleted] = await models.Teacher.destroy({
+        const deleted = await models.Teacher.destroy({
             where: {id: id}
         })
         if(deleted){

@@ -13,12 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Forum.hasMany(models.Post, {
         as: 'posts',
-        foreignKey: 'forum_id'
+        foreignKey: 'forum_id',
+        onDelete: 'cascade',
+        hooks: true,
       })
     }
   };
   Forum.init({
     group_id: DataTypes.INTEGER,
+    type: DataTypes.STRING,
+    image: DataTypes.STRING,
     name: DataTypes.STRING
   }, {
     sequelize,

@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Teacher.hasMany(models.Course, {
         foreignKey: 'teacher_id', 
-        as: 'courses'
+        as: 'courses',
+        onDelete: 'cascade',
+        hooks: true
       })
     }
   };

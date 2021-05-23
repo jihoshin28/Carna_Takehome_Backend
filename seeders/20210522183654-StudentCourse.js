@@ -3,7 +3,7 @@ const models = require('../models')
 
 const createStudentCourses  = (courseIds, studentIds) => {
   const seedArray = []
-  for(let i = 0; i < 50; i++){
+  for(let i = 0; i < 100; i++){
     let body = {}
       body['student_id'] = studentIds[Math.floor(Math.random() * studentIds.length)];
       body['course_id'] = courseIds[Math.floor(Math.random() * courseIds.length)];

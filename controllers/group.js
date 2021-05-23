@@ -18,7 +18,13 @@ const getGroupById = async(req, res) => {
     try {
         const { id } = req.params;
         const group = await models.Group.findOne({
-            where: { id: id}
+            where: { id: id},
+            include: [
+                {
+                    model: models.Student,
+                    as: 'students'
+                }
+            ]
         })
         if(group){
             return res.status(200).json({group})
@@ -59,7 +65,7 @@ const updateGroup = async(req, res) => {
 const deleteGroup = async(req, res) => {
     try {
         const {id} = req.params
-        const [deleted] = await models.Group.destroy({
+        const deleted = await models.Group.destroy({
             where: {id: id}
         })
         if(deleted){

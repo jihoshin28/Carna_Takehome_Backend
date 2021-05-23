@@ -16,11 +16,17 @@ module.exports = (sequelize, DataTypes) => {
         as: 'students',
         foreignKey: 'course_id'
       });
+      // Course.hasMany(models.StudentCourse, {
+      //   foreignKey: 'student_id',
+      //   onDelete: 'cascade',
+      //   hooks: true,
+      // });
     }
   };
   Course.init({
     teacher_id: DataTypes.INTEGER,
-    subject: DataTypes.STRING
+    subject: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Course',

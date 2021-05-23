@@ -67,7 +67,7 @@ const updateForum = async(req, res) => {
 const deleteForum = async(req, res) => {
     try {
         const {id} = req.params
-        const [deleted] = await models.Forum.destroy({
+        const deleted = await models.Forum.destroy({
             where: {id: id}
         })
         if(deleted){
