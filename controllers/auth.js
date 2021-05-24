@@ -36,12 +36,13 @@ const login = async(req, res) => {
     await models.Admin.findOne({
         where: {username: req.body.username}
     }).then(async(result) => {
-        console.log(result.dataValues, 'result')
-        // if(result.length === 0){
-        //     return res.status(302).send({
-        //         mesage: "User with this username does not exist"
-        //     })
-        // }
+        console.log(result, 'result')
+        if(!result){
+            return res.json({
+                success: false,
+                message: 'User with this username does not exist!'
+            })
+        }
         let myPassword = result.dataValues.password
         let salt = bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(myPassword, salt, function(err, hash) {
