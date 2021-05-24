@@ -34,32 +34,75 @@ const signUp = async(req, res) => {
 
 const login = async(req, res) => {
     await models.Admin.findOne({
-        where: {username: req.username}
+        where: {username: req.body.username}
     }).then(async(result) => {
-        if(result.length === 0){
-            return res.status(302).send({
-                mesage: "User with this username does not exist"
-            })
-        }
-
-        const validated = await bcrypt.compare(req.body.password, result[0].password)
+        console.log(result.dataValues, 'result')
+        // if(result.length === 0){
+        //     return res.status(302).send({
+        //         mesage: "User with this username does not exist"
+        //     })
+        // }
+        let myPassword = result.dataValues.password
+        let salt = bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(myPassword, salt, function(err, hash) {
+                bcrypt.compare(req.body.password, hash, function(err, response){
+                    if(err){
+                        throw err
+                    }
         
-        if(!validated){
-            res.status(404).send({
-                error: "Invalid credentials",
-                token: null
-            })
-        }
+                    if(response){
+                        console.log(response, "VALID RES")
+                        const token = jwt.sign({
+                            username: req.body.username
+                        },
+                        process.env.SECRET,
+                        {
+                            expiresIn: '10m'
+                        })
+                        console.log(token, 'token')
+                        return res.json({
+                            success: true,
+                            message: "Authorization successful!",
+                            token: token
+                        })
+                    } else {
+                        return res.json({
+                            success: false,
+                            message: "Passwords do not match!"
+                        })
+                    
+                    }
+                })
+            });
+        });
+        // const validated = await bcrypt.compare(req.body.password, myPasswordHash, function(err, response){
+        //     if(err){
+        //         throw err
+        //     }
 
-        const token = jwt.sign({
-            user: _.pick(results[0], ['id', 'email'])
-        },
-        process.env.SECRET,
-        {
-            expiresIn: '10m'
-        })
-
-        res.status(200).send({"token": token})
+        //     if(response){
+        //         console.log(response, "VALID RES")
+        //         const token = jwt.sign({
+        //             username: req.body.username
+        //         },
+        //         process.env.SECRET,
+        //         {
+        //             expiresIn: '10m'
+        //         })
+        //         console.log(token, 'token')
+        //         return res.json({
+        //             success: true,
+        //             message: "Authorization successful!",
+        //             token: token
+        //         })
+        //     } else {
+        //         return res.json({
+        //             success: false,
+        //             message: "Passwords do not match!"
+        //         })
+            
+        //     }
+        // })
 
     }).catch((error) => {
         throw error

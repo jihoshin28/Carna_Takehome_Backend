@@ -38,8 +38,9 @@ const getForumById = async(req, res) => {
 }
 
 const createForum = async(req, res) => {
+    console.log(req.body)
     try {
-        const forum = await models.Forum.create(req.body)
+        const forum = await models.Forum.create(req.body.forumInfo)
         return res.status(201).json({
             forum
         })

@@ -2,10 +2,10 @@ const models = require('../models')
 
 const getAllStudentGroups = async(req, res) => {
     try {
-        const students = await models.StudentGroup.findAll();
-        console.log(students)
+        const student_groups = await models.StudentGroup.findAll();
+        console.log(student_groups)
         res.header("Access-Control-Allow-Origin", "*");
-        return res.status(200).json({students})
+        return res.status(200).json({student_groups})
     } catch (error){
         return res.status(500).send(`ERROR: ${error.message}`)
     }
@@ -13,7 +13,7 @@ const getAllStudentGroups = async(req, res) => {
 
 const createStudentGroup = async(req, res) => {
     try {
-        const studentGroup = await models.StudentGroup.create(req.body)
+        const studentGroup = await models.StudentGroup.create(req.body.studentGroupInfo)
         return res.status(201).json({
             studentGroup,
         })

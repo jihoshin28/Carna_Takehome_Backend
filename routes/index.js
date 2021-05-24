@@ -5,14 +5,16 @@ const groups = require('../controllers/group')
 const courses = require('../controllers/course')
 const forums = require('../controllers/forum')
 const posts = require('../controllers/post')
-const student_groups = require ('../controllers/studentgroup')
-const student_courses = require ('../controllers/studentcourse')
+const student_groups = require('../controllers/studentgroup')
+const student_courses = require('../controllers/studentcourse')
 const auth = require('../controllers/auth')
+const admin = require('../controllers/admin')
 
 
 const router = Router()
 
-router.get('/', (req, res) => res.send('Welcome!'))
+router.get('/', (req, res) => res.send('Welcome to Carna Admin Panel!'))
+router.get('/api', (req, res) => res.send('Welcome to Carna Admin Panel!'))
 
 // students routes
 
@@ -70,12 +72,19 @@ router.delete('/student_groups/:group_id/:student_id', student_groups.deleteStud
 
 //studentcourse routes
 
+router.get('/student_courses', student_courses.getAllStudentCourses)
 router.post('/student_courses', student_courses.createStudentCourse)
+router.get('/student_courses/:course_id/:student_id', student_courses.getCourseStudentInfo)
 router.delete('/student_courses/:course_id/:student_id', student_courses.deleteStudentCourse)
 
 //auth routes
 
-router.post('/auth/login', auth.login)
-router.post('/auth/signup', auth.signUp)
+router.post('/login', auth.login)
+router.post('/signup', auth.signUp)
+
+//admin routes
+
+router.get('/admin', admin.getAdmin)
+router.put('/admin', admin.updateAdmin)
 
 module.exports = router

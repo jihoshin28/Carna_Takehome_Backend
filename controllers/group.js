@@ -36,8 +36,9 @@ const getGroupById = async(req, res) => {
 }
 
 const createGroup = async(req, res) => {
+    console.log(req.body)
     try {
-        const group = await models.Group.create(req.body)
+        const group = await models.Group.create(req.body.groupInfo)
         return res.status(201).json({
             group
         })

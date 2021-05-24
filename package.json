@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "seed-admin": "sequelize db:seed --seed 20210524062032-Admin.js",
     "seed-students": "sequelize db:seed --seed 20210520220830-Student.js",
     "seed-teachers": "sequelize db:seed --seed 20210520220838-Teacher.js",
     "seed-groups": "sequelize db:seed --seed 20210520220849-Group.js",
@@ -12,7 +13,7 @@
     "seed-posts": "sequelize db:seed --seed 20210520220915-Post.js",
     "seed-studentgroups": "sequelize db:seed --seed 20210522183654-StudentCourse.js",
     "seed-studentcourses": "sequelize db:seed --seed 20210522183707-StudentGroup.js",
-    "seed-1": "npm-run-all -p seed-students seed-teachers seed-groups",
+    "seed-1": "npm-run-all -p seed-students seed-teachers seed-groups seed-admin",
     "seed-2": "npm-run-all -p seed-courses seed-forums",
     "seed-3": "npm-run-all -p seed-studentgroups seed-studentcourses seed-posts",
     "create-db": "babel-node ./db/dbCreate createdb",

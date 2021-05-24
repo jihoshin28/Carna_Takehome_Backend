@@ -39,7 +39,7 @@ const getCourseById = async(req, res) => {
 
 const createCourse = async(req, res) => {
     try {
-        const course = await models.Course.create(req.body)
+        const course = await models.Course.create(req.body.courseInfo)
         return res.status(201).json({
             course,
         })

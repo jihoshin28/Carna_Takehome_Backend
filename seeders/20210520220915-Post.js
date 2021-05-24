@@ -9,7 +9,7 @@ const createPosts  = (forumIds, studentIds) => {
       body['student_id'] = studentIds[Math.floor(Math.random() * studentIds.length)];
       body['forum_id'] = forumIds[Math.floor(Math.random() * forumIds.length)];
       body['title'] = `${faker.lorem.word()}`
-      body['content'] = `${faker.lorem.paragraph()}`
+      body['content'] = `${faker.lorem.paragraphs()}`
       body['createdAt'] = new Date()
       body['updatedAt'] = new Date()
       seedArray.push(body)
