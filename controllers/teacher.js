@@ -40,7 +40,7 @@ const getTeacherById = async(req, res) => {
 
 const createTeacher = async(req, res) => {
     try {
-        const teacher = await models.Teacher.create(req.body)
+        const teacher = await models.Teacher.create(req.body.teacherInfo)
         return res.status(201).json({
             teacher
         })

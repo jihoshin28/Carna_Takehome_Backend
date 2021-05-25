@@ -8,7 +8,7 @@ const config = {
 
 let createdb = () => {
     console.log('ran')
-    pgtools.createdb(config, "carna_takehome_server", function(err, res) {
+    pgtools.createdb(config, "newdb", function(err, res) {
         if (err) {
           console.error(err);
           process.exit(-1);

@@ -6,6 +6,7 @@ const getAdmin = async(req, res) => {
         if(admin){
             return res.status(200).json({admin})
         }
+        return res.status(404).send('Admin with this ID does not exist')
     } catch (error){
         return res.status(500).send(error.message)
     }
@@ -14,14 +15,14 @@ const getAdmin = async(req, res) => {
 const updateAdmin = async(req, res) => {
     try{
         const {id} = req.params
-        const [updated] = await models.Course.update(req.body, {
+        const updated = await models.Admin.update(req.body, {
             where: {id: id}
         })
         if(updated){
-            const updatedCourse = await models.Course.findOne({where: {id: id}})
-            return res.status(200).json({course: updatedCourse})
+            const updatedAdmin = await models.Admin.findOne({where: {id: id}})
+            return res.status(200).json({updatedAdmin})
         }
-        throw new Error('Course not found');
+
     } catch (error){
         return res.status(500).send(error.message)
     }

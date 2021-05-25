@@ -3,7 +3,6 @@ const models = require('../models')
 const getAllStudentGroups = async(req, res) => {
     try {
         const student_groups = await models.StudentGroup.findAll();
-        console.log(student_groups)
         res.header("Access-Control-Allow-Origin", "*");
         return res.status(200).json({student_groups})
     } catch (error){

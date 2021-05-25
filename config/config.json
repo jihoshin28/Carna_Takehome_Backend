@@ -1,14 +1,14 @@
 {
   "development": {
-    "url": "postgres://postgres:1234@localhost:5432/carna_takehome_server",
+    "url": "postgres://postgres:1234@localhost:5432/newdb",
     "dialect": "postgres"
   },
   "test": {
-    "url": "postgres://postgres:1234@localhost:5432/carna_takehome_server",
+    "url": "postgres://postgres:1234@localhost:5432/newdb",
     "dialect": "postgres"
   },
   "production": {
-    "url": "postgres://postgres:1234@localhost:5432/carna_takehome_server",
+    "url": "postgres://postgres:1234@localhost:5432/newdb",
     "dialect": "postgres"
   }
 }

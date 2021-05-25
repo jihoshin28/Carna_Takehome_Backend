@@ -39,6 +39,21 @@ const getCourseStudentInfo = async(req, res) => {
     }
 }
 
+const getCourseStudentsInfo = async(req, res) => {
+    try {
+        let {course_id} = req.params
+        const course_student_info = await models.StudentCourse.findAll({
+            where: {
+                course_id: course_id
+            }
+        });
+        res.header("Access-Control-Allow-Origin", "*");
+        return res.status(200).json({course_student_info})
+    } catch (error){
+        return res.status(500).send(`ERROR: ${error.message}`)
+    }
+}
+
 const createStudentCourse = async(req, res) => {
     try {
         const studentCourse = await models.StudentCourse.create(req.body.studentCourseInfo)
@@ -52,7 +67,6 @@ const createStudentCourse = async(req, res) => {
 
 const deleteStudentCourse = async(req, res) => {
     try {
-        console.log(req.params)
         const {student_id, course_id} = req.params
         const deleted = await models.StudentCourse.destroy({
             where: {student_id: student_id, course_id: course_id}
@@ -69,6 +83,7 @@ const deleteStudentCourse = async(req, res) => {
 module.exports = {
     getAllStudentCourses,
     getStudentCourseInfo,
+    getCourseStudentsInfo,
     getCourseStudentInfo,
     createStudentCourse,
     deleteStudentCourse

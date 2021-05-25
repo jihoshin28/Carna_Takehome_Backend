@@ -14,7 +14,6 @@ const getAllStudents = async(req, res) => {
                 }
             ]
         });
-        console.log(students)
         res.header("Access-Control-Allow-Origin", "*");
         return res.status(200).json({students})
     } catch (error){
@@ -45,7 +44,7 @@ const getStudentById = async(req, res) => {
 
 const createStudent = async(req, res) => {
     try {
-        const student = await models.Student.create(req.body)
+        const student = await models.Student.create(req.body.studentInfo)
         return res.status(201).json({
             student,
         })
