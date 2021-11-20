@@ -8,5 +8,5 @@ server.use(express.json())
 server.use('/api', routes)
 
 module.exports = {
-    server
+    server 
 }

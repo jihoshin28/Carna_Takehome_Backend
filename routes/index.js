@@ -1,80 +1,111 @@
 const { Router } = require('express')
-const students = require('../controllers/student')
-const teachers = require('../controllers/teacher')
-const groups = require('../controllers/group')
-const courses = require('../controllers/course')
-const forums = require('../controllers/forum')
-const posts = require('../controllers/post')
-const student_groups = require('../controllers/studentgroup')
-const student_courses = require('../controllers/studentcourse')
+const quotesController = require('../controllers/student')
+const bookingsController = require('../controllers/teacher')
+const itemsController = require('../controllers/group')
+const reviewsController = require('../controllers/course')
+const quoteItemsController = require('../controllers/forum')
+const bookingItemsController = require('../controllers/post')
 const auth = require('../controllers/auth')
 const admin = require('../controllers/admin')
 const verifyToken = require('../middleware/index.js').verifyToken
-
+ 
 
 const router = Router()
 
 console.log(verifyToken, 'verifyToken')
-router.get('/', (req, res) => res.send('Welcome to Carna Admin Panel!'))
-router.get('/api', (req, res) => res.send('Welcome to Carna Admin Panel!'))
+router.get('/', (req, res) => res.send('Welcome to UpackHaulers!'))
 
-// students routes
+// quotes routes
 
-router.get('/students', verifyToken, students.getAllStudents)
-router.get('/students/:id', verifyToken, students.getStudentById)
-router.post('/students', verifyToken, students.createStudent)
-router.delete('/students/:id', verifyToken, students.deleteStudent)
+router.get('/quotes', verifyToken, quotesController.getAllQuotes)
+router.get('/quotes/:id', verifyToken, quotesController.getQuoteById)
+router.post('/quotes', verifyToken, quotesController.createQuote)
+router.put('/quotes/:id', verifyToken, quotesController.updateQuote)
+router.delete('/quotes/:id', verifyToken, quotesController.deleteQuote)
 
-// teachers routes
+// bookings routes
 
-router.get('/teachers', verifyToken, teachers.getAllTeachers)
-router.get('/teachers/:id', verifyToken, teachers.getTeacherById)
-router.post('/teachers', verifyToken, teachers.createTeacher)
-router.delete('/teachers/:id', verifyToken, teachers.deleteTeacher)
+router.get('/bookings', verifyToken, bookingsController.getAllBookings)
+router.get('/bookings/:id', verifyToken, bookingsController.getBookingById)
+router.post('/bookings', verifyToken, bookingsController.createBooking)
+router.put('/bookings/:id', verifyToken, reviews.updateBooking)
+router.delete('/bookings/:id', verifyToken, bookingsController.deleteBooking)
 
-// groups routes
+// items routes
 
-router.get('/groups', verifyToken, groups.getAllGroups)
-router.get('/groups/:id', verifyToken, groups.getGroupById)
-router.post('/groups', verifyToken, groups.createGroup)
-router.delete('/groups/:id', verifyToken, groups.deleteGroup)
+router.get('/items', verifyToken, itemsController.getAllItems)
+router.get('/items/:id', verifyToken, itemsController.getItemById)
+router.post('/items', verifyToken, itemsController.createItem)
+router.delete('/items/:id', verifyToken, itemsController.deleteItem)
 
-// courses routes
+// reviews routes
 
-router.get('/courses', verifyToken, courses.getAllCourses)
-router.get('/courses/:id', verifyToken, courses.getCourseById)
-router.post('/courses', verifyToken, courses.createCourse)
-router.put('/courses/:id', verifyToken, courses.updateCourse)
-router.delete('/courses/:id', verifyToken, courses.deleteCourse)
+router.get('/reviews', verifyToken, reviewsController.getAllReviews)
+router.get('/reviews/:id', verifyToken, reviewsController.getReviewById)
+router.post('/reviews', verifyToken, reviewsController.createReview)
+router.put('/reviews/:id', verifyToken, reviewsController.updateReview)
+router.delete('/reviews/:id', verifyToken, reviewsController.deleteReview)
 
-// forums routes
+//quote_item routes
 
-router.get('/forums', verifyToken, forums.getAllForums)
-router.get('/forums/:id', verifyToken, forums.getForumById)
-router.post('/forums', verifyToken, forums.createForum)
-router.put('/forums/:id', verifyToken, forums.updateForum)
-router.delete('/forums/:id', verifyToken, forums.deleteForum)
+router.get('/quote_items', verifyToken, quoteItemsController.getAllQuoteItems)
+router.post('/quote_items', verifyToken, quoteItemsController.createQuoteItem)
+router.put('/quote_items/:item_id/:quote_id', verifyToken, quoteItemsController.updateQuoteItem)
+router.delete('/quote_items/:item_id/:quote_id', verifyToken, quoteItemsController.deleteQuoteItem)
 
-// posts routes 
+//booking_item routes
 
-router.get('/posts', verifyToken, posts.getAllPosts)
-router.get('/posts/:id', verifyToken, posts.getPostById)
-router.post('/posts', verifyToken, posts.createPost)
-router.delete('/posts/:id', verifyToken, posts.deletePost)
+router.get('/booking_items', verifyToken, bookingItemsController.getAllBookingItems)
+router.post('/booking_items', verifyToken, bookingItemsController.createBookingItem)
+router.put('/booking_items/:item_id/:booking_id', verifyToken, bookingItemsController.updateBookingItem)
+router.delete('/booking_items/:item_id/:booking_id', verifyToken, bookingItemsController.deleteBookingItem)
 
-//studentgroup routes
+// Routes with verifyToken
 
-router.get('/student_groups', verifyToken, student_groups.getAllStudentGroups)
-router.post('/student_groups', verifyToken, student_groups.createStudentGroup)
-router.delete('/student_groups/:group_id/:student_id', verifyToken, student_groups.deleteStudentGroup)
+// // quotes routes
 
-//studentcourse routes
+// router.get('/quotes', verifyToken, quotesController.getAllQuotes)
+// router.get('/quotes/:id', verifyToken, quotesController.getQuoteById)
+// router.post('/quotes', verifyToken, quotesController.createQuote)
+// router.put('/quotes/:id', verifyToken, quotesController.updateQuote)
+// router.delete('/quotes/:id', verifyToken, quotesController.deleteQuote)
 
-router.get('/student_courses', verifyToken, student_courses.getAllStudentCourses)
-router.post('/student_courses', verifyToken, student_courses.createStudentCourse)
-router.get('/student_courses/course/:course_id', verifyToken, student_courses.getCourseStudentsInfo)
-router.get('/student_courses/:course_id/:student_id', verifyToken, student_courses.getCourseStudentInfo)
-router.delete('/student_courses/:course_id/:student_id', verifyToken, student_courses.deleteStudentCourse)
+// // bookings routes
+
+// router.get('/bookings', verifyToken, bookingsController.getAllBookings)
+// router.get('/bookings/:id', verifyToken, bookingsController.getBookingById)
+// router.post('/bookings', verifyToken, bookingsController.createBooking)
+// router.put('/bookings/:id', verifyToken, reviews.updateBooking)
+// router.delete('/bookings/:id', verifyToken, bookingsController.deleteBooking)
+
+// // items routes
+
+// router.get('/items', verifyToken, itemsController.getAllItems)
+// router.get('/items/:id', verifyToken, itemsController.getItemById)
+// router.post('/items', verifyToken, itemsController.createItem)
+// router.delete('/items/:id', verifyToken, itemsController.deleteItem)
+
+// // reviews routes
+
+// router.get('/reviews', verifyToken, reviewsController.getAllReviews)
+// router.get('/reviews/:id', verifyToken, reviewsController.getReviewById)
+// router.post('/reviews', verifyToken, reviewsController.createReview)
+// router.put('/reviews/:id', verifyToken, reviewsController.updateReview)
+// router.delete('/reviews/:id', verifyToken, reviewsController.deleteReview)
+
+// //quote_item routes
+
+// router.get('/quote_items', verifyToken, quoteItemsController.getAllQuoteItems)
+// router.post('/quote_items', verifyToken, quoteItemsController.createQuoteItem)
+// router.put('/quote_items/:item_id/:quote_id', verifyToken, quoteItemsController.updateQuoteItem)
+// router.delete('/quote_items/:item_id/:quote_id', verifyToken, quoteItemsController.deleteQuoteItem)
+
+// //booking_item routes
+
+// router.get('/booking_items', verifyToken, bookingItemsController.getAllBookingItems)
+// router.post('/booking_items', verifyToken, bookingItemsController.createBookingItem)
+// router.put('/booking_items/:item_id/:booking_id', verifyToken, bookingItemsController.updateBookingItem)
+// router.delete('/booking_items/:item_id/:booking_id', verifyToken, bookingItemsController.deleteBookingItem)
 
 //auth routes
 
